@@ -13,8 +13,8 @@ declare module '@stellar/stellar-sdk' {
   export namespace rpc {
     class Server {
       constructor(serverURL: string, opts?: any)
-      getLedgerEntries(...keys: any[]): Promise<{
-        entries: Api.LedgerEntryResult[]
+      getLedgerEntries(...keys: Array<any>): Promise<{
+        entries: Array<Api.LedgerEntryResult>
         latestLedger: number
       }>
     }
