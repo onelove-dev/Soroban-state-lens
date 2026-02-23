@@ -32,6 +32,7 @@ const createNetworkConfigSlice = (
   set: (fn: (state: LensStore) => Partial<LensStore>) => void,
 ): NetworkConfigSlice => ({
   networkConfig: DEFAULT_NETWORK_CONFIG,
+  lastCustomUrl: undefined,
 
   setNetworkConfig: (config: Partial<NetworkConfig>) =>
     set((state) => ({
@@ -41,6 +42,11 @@ const createNetworkConfigSlice = (
   resetNetworkConfig: () =>
     set(() => ({
       networkConfig: DEFAULT_NETWORK_CONFIG,
+    })),
+
+  setLastCustomUrl: (url: string) =>
+    set(() => ({
+      lastCustomUrl: url,
     })),
 })
 
