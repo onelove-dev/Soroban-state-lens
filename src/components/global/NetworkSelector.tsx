@@ -23,10 +23,18 @@ const NETWORK_OPTIONS: Array<NetworkInfo> = [
 
 export default function NetworkSelector() {
   const [isOpen, setIsOpen] = useState(false)
-  const [customUrl, setCustomUrl] = useState('')
+<<<<<<< HEAD
+=======
   const [showCustomInput, setShowCustomInput] = useState(false)
-  const [isHydrated, setIsHydrated] = useState(false)
+  const [customRpcUrl, setCustomRpcUrl] = useState('')
   const [validationError, setValidationError] = useState('')
+>>>>>>> dc5b73348eea541593ec4cd60ffbf3fc49dc43e2
+  const [customUrl, setCustomUrl] = useState('')
+  const [isHydrated, setIsHydrated] = useState(false)
+<<<<<<< HEAD
+  const [validationError, setValidationError] = useState('')
+=======
+>>>>>>> dc5b73348eea541593ec4cd60ffbf3fc49dc43e2
   const dropdownRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -70,6 +78,11 @@ export default function NetworkSelector() {
       // Preset network: clear any custom URL usage
       setNetworkConfig(option.config)
       setShowCustomInput(false)
+<<<<<<< HEAD
+=======
+      setValidationError('')
+      setCustomRpcUrl('')
+>>>>>>> dc5b73348eea541593ec4cd60ffbf3fc49dc43e2
     } else {
       // Custom: restore last custom URL or set up for new input
       const urlToUse = lastCustomUrl || networkConfig.rpcUrl || ''
@@ -84,8 +97,43 @@ export default function NetworkSelector() {
     setIsOpen(false)
   }
 
+<<<<<<< HEAD
   const handleCustomUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const url = e.target.value
+=======
+  const handleCustomUrlBlur = () => {
+    if (customRpcUrl.trim()) {
+      const validation = validateRpcUrl(customRpcUrl)
+      if (!validation.isValid) {
+        setValidationError(validation.error || 'Invalid URL')
+      }
+    }
+  }
+
+  const handleApplyCustomUrl = () => {
+    const validation = validateRpcUrl(customRpcUrl)
+    if (validation.isValid) {
+      setNetworkConfig({
+        networkId: 'custom',
+        rpcUrl: customRpcUrl.trim(),
+        networkPassphrase: 'Custom Network', // Default passphrase
+      })
+      setShowCustomInput(false)
+      setValidationError('')
+      setCustomRpcUrl('')
+    } else {
+      setValidationError(validation.error || 'Invalid URL')
+    }
+  }
+
+  const handleCancelCustom = () => {
+    setShowCustomInput(false)
+    setCustomRpcUrl('')
+    setValidationError('')
+  }
+
+  const handleCustomUrlChange = (url: string) => {
+>>>>>>> dc5b73348eea541593ec4cd60ffbf3fc49dc43e2
     setCustomUrl(url)
 
     // Validate URL and set error message
@@ -100,12 +148,6 @@ export default function NetworkSelector() {
       networkId: 'custom',
       rpcUrl: url,
     })
-  }
-
-  const handleCustomUrlBlur = () => {
-    if (customUrl.trim()) {
-      setLastCustomUrl(customUrl.trim())
-    }
   }
 
   const isValidUrl = (url: string) => {
