@@ -27,9 +27,10 @@ export { DEFAULT_NETWORKS }
  * Network config slice creator
  */
 const createNetworkConfigSlice = (
-  set: (fn: (state: LensStore) => Partial<LensStore>) => void
+  set: (fn: (state: LensStore) => Partial<LensStore>) => void,
 ): NetworkConfigSlice => ({
   networkConfig: DEFAULT_NETWORK_CONFIG,
+  lastCustomUrl: undefined,
 
   setNetworkConfig: (config: Partial<NetworkConfig>) =>
     set((state) => ({
@@ -40,13 +41,18 @@ const createNetworkConfigSlice = (
     set(() => ({
       networkConfig: DEFAULT_NETWORK_CONFIG,
     })),
+
+  setLastCustomUrl: (url: string) =>
+    set(() => ({
+      lastCustomUrl: url,
+    })),
 })
 
 /**
  * Ledger data slice creator
  */
 const createLedgerDataSlice = (
-  set: (fn: (state: LensStore) => Partial<LensStore>) => void
+  set: (fn: (state: LensStore) => Partial<LensStore>) => void,
 ): LedgerDataSlice => ({
   ledgerData: {},
 
@@ -84,7 +90,7 @@ const createLedgerDataSlice = (
  * Expanded nodes slice creator
  */
 const createExpandedNodesSlice = (
-  set: (fn: (state: LensStore) => Partial<LensStore>) => void
+  set: (fn: (state: LensStore) => Partial<LensStore>) => void,
 ): ExpandedNodesSlice => ({
   expandedNodes: [],
 
@@ -96,14 +102,18 @@ const createExpandedNodesSlice = (
         }
         return { expandedNodes: [...state.expandedNodes, nodeId] }
       } else {
-        return { expandedNodes: state.expandedNodes.filter((id) => id !== nodeId) }
+        return {
+          expandedNodes: state.expandedNodes.filter((id) => id !== nodeId),
+        }
       }
     }),
 
   toggleExpanded: (nodeId: string) =>
     set((state) => {
       if (state.expandedNodes.includes(nodeId)) {
-        return { expandedNodes: state.expandedNodes.filter((id) => id !== nodeId) }
+        return {
+          expandedNodes: state.expandedNodes.filter((id) => id !== nodeId),
+        }
       }
       return { expandedNodes: [...state.expandedNodes, nodeId] }
     }),
@@ -153,9 +163,11 @@ export const useLensStore = create<LensStore>()(
 /**
  * Selector hooks for common use cases
  */
-export const useNetworkConfig = () => useLensStore((state) => state.networkConfig)
+export const useNetworkConfig = () =>
+  useLensStore((state) => state.networkConfig)
 export const useLedgerData = () => useLensStore((state) => state.ledgerData)
-export const useExpandedNodes = () => useLensStore((state) => state.expandedNodes)
+export const useExpandedNodes = () =>
+  useLensStore((state) => state.expandedNodes)
 
 /**
  * Get store state outside of React components (for testing)
