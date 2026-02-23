@@ -22,9 +22,9 @@ describe('serializeExpandedNodes', () => {
   })
 
   it('should handle non-array inputs gracefully', () => {
-    // @ts-ignore
+    // @ts-ignore - testing runtime behavior for non-string array
     expect(serializeExpandedNodes(null)).toBe('[]')
-    // @ts-ignore
+    // @ts-ignore - testing runtime behavior for non-string array
     expect(serializeExpandedNodes(undefined)).toBe('[]')
   })
 
