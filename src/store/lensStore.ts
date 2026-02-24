@@ -150,14 +150,16 @@ export const useLensStore = create<LensStore>()(
       name: NETWORK_CONFIG_STORAGE_KEY,
       storage: createSafeStorage<PersistedState>(),
       // Only persist networkConfig slice
-      partialize: (state): PersistedState => ({ networkConfig: state.networkConfig }),
+      partialize: (state): PersistedState => ({
+        networkConfig: state.networkConfig,
+      }),
       // Validate and merge persisted data safely
       merge: (persistedState, currentState) => ({
         ...currentState,
         ...mergeNetworkConfig(persistedState, currentState),
       }),
-    }
-  )
+    },
+  ),
 )
 
 /**

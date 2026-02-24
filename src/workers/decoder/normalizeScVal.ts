@@ -119,7 +119,7 @@ export function normalizeScVal(
       // Handle vectors with recursive normalization
       if (Array.isArray(scVal.value)) {
         // Recursively normalize each item while preserving order
-        return scVal.value.map(item => normalizeScVal(item))
+        return scVal.value.map((item) => normalizeScVal(item))
       }
       return []
 

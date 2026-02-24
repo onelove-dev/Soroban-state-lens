@@ -8,18 +8,18 @@
  * @throws Error if the method name is empty.
  */
 export function buildJsonRpcRequest(
-    method: string,
-    params: unknown,
-    id: number
+  method: string,
+  params: unknown,
+  id: number,
 ): { jsonrpc: '2.0'; method: string; params: unknown; id: number } {
-    if (!method || method.trim().length === 0) {
-        throw new Error('JSON-RPC method name cannot be empty');
-    }
+  if (!method || method.trim().length === 0) {
+    throw new Error('JSON-RPC method name cannot be empty')
+  }
 
-    return {
-        jsonrpc: '2.0',
-        method,
-        params,
-        id,
-    };
+  return {
+    jsonrpc: '2.0',
+    method,
+    params,
+    id,
+  }
 }

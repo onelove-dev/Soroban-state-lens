@@ -99,14 +99,22 @@ export function validateRpcUrl(url: string): ValidationResult {
   } catch (error) {
     // URL constructor throws on invalid URLs
     // Check specific error cases for better error messages
-    if (trimmedUrl.endsWith('://') || (trimmedUrl.startsWith('https://') && trimmedUrl.length === 8) || (trimmedUrl.startsWith('http://') && trimmedUrl.length === 7)) {
+    if (
+      trimmedUrl.endsWith('://') ||
+      (trimmedUrl.startsWith('https://') && trimmedUrl.length === 8) ||
+      (trimmedUrl.startsWith('http://') && trimmedUrl.length === 7)
+    ) {
       return {
         isValid: false,
         error: 'Invalid hostname',
       }
     }
 
-    if (trimmedUrl.includes('://') && !trimmedUrl.startsWith('http://') && !trimmedUrl.startsWith('https://')) {
+    if (
+      trimmedUrl.includes('://') &&
+      !trimmedUrl.startsWith('http://') &&
+      !trimmedUrl.startsWith('https://')
+    ) {
       return {
         isValid: false,
         error: 'URL must start with http:// or https://',

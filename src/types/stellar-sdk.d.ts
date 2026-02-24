@@ -9,5 +9,19 @@ declare module '@stellar/stellar-sdk' {
     toScVal(): any
     toString(): string
   }
-}
 
+  export namespace rpc {
+    export class Server {
+      constructor(url: string)
+      getLedgerEntries(...keys: Array<any>): Promise<any>
+    }
+    export namespace Api {
+      export interface LedgerEntryResult {
+        key: any
+        val: any
+        lastModifiedLedgerSeq?: number
+        liveUntilLedgerSeq?: number
+      }
+    }
+  }
+}
