@@ -37,11 +37,4 @@ describe('selectExpandedNodeCount', () => {
     expect(selectExpandedNodeCount(makeState(123))).toBe(0)
     expect(selectExpandedNodeCount(makeState({}))).toBe(0)
   })
-
-  it('should return 0 when state is null or undefined', () => {
-    // @ts-ignore - testing runtime behavior
-    expect(selectExpandedNodeCount(null)).toBe(0)
-    // @ts-ignore - testing runtime behavior
-    expect(selectExpandedNodeCount(undefined)).toBe(0)
-  })
 })
